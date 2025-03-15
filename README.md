@@ -34,3 +34,6 @@ Join our community of developers creating universal apps.
 
 - [gluestack-ui on GitHub](https://github.com/gluestack/gluestack-ui): View our open source ui library and contribute.
 - [gluestack community](https://discord.com/channels/1050761204852858900/1336392784168484914): Chat with gluestack users and ask questions.
+
+
+npm install --save-dev @eslint/js eslint eslint-config-prettier eslint-plugin-prettier prettier typescript-eslint
