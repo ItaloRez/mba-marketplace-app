@@ -1,4 +1,4 @@
-import Logo from '@/assets/Logo.png'
+import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Box } from '@/components/ui/box'
 import { Image } from '@/components/ui/image'
@@ -11,7 +11,7 @@ import { Text } from 'react-native'
 import { z } from 'zod'
 
 import Access from '@/assets/icon/access.svg'
-import { Button } from '@/components/Button'
+import Logo from '@/assets/Logo.png'
 
 const schema = z.object({
   email: z

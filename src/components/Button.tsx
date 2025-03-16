@@ -73,7 +73,6 @@ export function Button({
   iconOnly = false,
   ...rest
 }: Props) {
-  console.log('isIconOnly:', iconOnly) // para depurar
   return (
     <GsButton className={buttonStyle({ size, variant, iconOnly })} {...rest}>
       {leftIcon && (
