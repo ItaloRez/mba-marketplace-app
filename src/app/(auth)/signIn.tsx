@@ -12,6 +12,7 @@ import { z } from 'zod'
 
 import Access from '@/assets/icon/access.svg'
 import { Button } from '@/components/Button'
+import { Checkbox } from '@/components/Checkbox'
 
 const schema = z.object({
   email: z
