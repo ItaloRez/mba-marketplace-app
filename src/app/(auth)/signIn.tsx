@@ -1,13 +1,40 @@
 import React from 'react'
-import { Text } from 'react-native'
+import Logo from '@/assets/Logo.png'
+import { Input } from '@/components/Input'
 import { Box } from '@/components/ui/box'
+import { Button, ButtonText } from '@/components/ui/button'
 import { Image } from '@/components/ui/image'
 import { VStack } from '@/components/ui/vstack'
-import Logo from '@/assets/Logo.png'
-import { Button, ButtonText } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Mail } from 'lucide-react-native'
+import { FormProvider, useForm } from 'react-hook-form'
+import { Text } from 'react-native'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+import Access from '@/assets/icon/access.svg'
+
+const schema = z.object({
+  email: z
+    .string({
+      required_error: 'E-mail é obrigatório',
+    })
+    .email({
+      message: 'E-mail inválido',
+    }),
+  password: z
+    .string({
+      required_error: 'Senha é obrigatória',
+    })
+    .min(6, {
+      message: 'Senha deve ter no mínimo 6 caracteres',
+    }),
+})
 
 export default function Home() {
+  const methods = useForm({
+    resolver: zodResolver(schema),
+  })
+
   return (
     <Box className="flex-1 bg-white h-[100vh] px-10 py-16">
       <VStack className="w-full justify-center gap-8 items-center">
@@ -28,10 +55,28 @@ export default function Home() {
       </VStack>
       <VStack className="gap-10">
         <VStack className="gap-5">
-          <Input />
-          <Input />
+          <FormProvider {...methods}>
+            <Input
+              placeholder="E-mail"
+              keyboardType="email-address"
+              label="e-mail"
+              leftIcon={Mail}
+              name="email"
+            />
+            <Input
+              secureTextEntry
+              name="password"
+              label="Senha"
+              placeholder="Sua senha"
+              leftIcon={Access}
+            />
+          </FormProvider>
         </VStack>
-        <Button>
+        <Button
+          onPress={methods.handleSubmit((data) => {
+            console.log(data)
+          })}
+        >
           <ButtonText>Cadastrar</ButtonText>
         </Button>
       </VStack>
