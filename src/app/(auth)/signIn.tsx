@@ -1,18 +1,17 @@
-import React from 'react'
 import Logo from '@/assets/Logo.png'
 import { Input } from '@/components/Input'
 import { Box } from '@/components/ui/box'
 import { Image } from '@/components/ui/image'
 import { VStack } from '@/components/ui/vstack'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRight, Mail } from 'lucide-react-native'
+import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Text } from 'react-native'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import Access from '@/assets/icon/access.svg'
 import { Button } from '@/components/Button'
-import { Checkbox } from '@/components/Checkbox'
 
 const schema = z.object({
   email: z
