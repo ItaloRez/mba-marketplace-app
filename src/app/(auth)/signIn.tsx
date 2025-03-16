@@ -12,6 +12,7 @@ import { z } from 'zod'
 
 import Access from '@/assets/icon/access.svg'
 import Logo from '@/assets/Logo.png'
+import { Link } from 'expo-router'
 
 const schema = z.object({
   email: z
@@ -79,7 +80,9 @@ export default function Home() {
         <Text className="text-body-md text-grayscale-300">
           Ainda não tem uma conta?
         </Text>
-        <Button title="Cadastrar" rightIcon={ArrowRight} variant="outline" />
+        <Link asChild href="/(auth)/signUp">
+          <Button title="Cadastrar" rightIcon={ArrowRight} variant="outline" />
+        </Link>
       </VStack>
     </Box>
   )

@@ -52,7 +52,7 @@ export function Input({
             isInvalid={invalid}
             size="md"
             isReadOnly={isReadOnly}
-            className="pt-5"
+            className="pt-5 w-full"
           >
             <GSInput
               className={'my-1 group'}
