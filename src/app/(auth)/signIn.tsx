@@ -2,16 +2,16 @@ import React from 'react'
 import Logo from '@/assets/Logo.png'
 import { Input } from '@/components/Input'
 import { Box } from '@/components/ui/box'
-import { Button, ButtonText } from '@/components/ui/button'
 import { Image } from '@/components/ui/image'
 import { VStack } from '@/components/ui/vstack'
-import { Mail } from 'lucide-react-native'
+import { ArrowRight, Mail } from 'lucide-react-native'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Text } from 'react-native'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import Access from '@/assets/icon/access.svg'
+import { Button } from '@/components/Button'
 
 const schema = z.object({
   email: z
@@ -53,7 +53,7 @@ export default function Home() {
           </Text>
         </VStack>
       </VStack>
-      <VStack className="gap-10">
+      <VStack className="gap-10 mt-10">
         <VStack className="gap-5">
           <FormProvider {...methods}>
             <Input
@@ -72,21 +72,14 @@ export default function Home() {
             />
           </FormProvider>
         </VStack>
-        <Button
-          onPress={methods.handleSubmit((data) => {
-            console.log(data)
-          })}
-        >
-          <ButtonText>Cadastrar</ButtonText>
-        </Button>
+
+        <Button title="Acessar" rightIcon={ArrowRight} />
       </VStack>
-      <VStack>
+      <VStack className="mt-auto gap-5">
         <Text className="text-body-md text-grayscale-300">
           Ainda não tem uma conta?
         </Text>
-        <Button>
-          <ButtonText>Cadastrar</ButtonText>
-        </Button>
+        <Button title="Cadastrar" rightIcon={ArrowRight} variant="outline" />
       </VStack>
     </Box>
   )
