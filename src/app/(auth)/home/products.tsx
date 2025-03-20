@@ -1,7 +1,7 @@
 import { Box } from '@/components/ui/box'
 import { Image } from '@/components/ui/image'
 import { VStack } from '@/components/ui/vstack'
-import React, { useState } from 'react'
+import React from 'react'
 import { FlatList, KeyboardAvoidingView, Platform, Text } from 'react-native'
 
 import { HStack } from '@/components/ui/hstack'
@@ -9,15 +9,14 @@ import { ArrowRight, Search, SlidersVertical } from 'lucide-react-native'
 
 import Sofa from '@/assets/images/sofa.png'
 import { Button } from '@/components/Button'
+import { DrawerFilters } from '@/components/DrawerFilters'
 import { Input } from '@/components/Input'
 import { Productcard } from '@/components/ProductCard'
 import { Link } from 'expo-router'
 import { FormProvider, useForm } from 'react-hook-form'
-import { DrawerFilters } from '@/components/DrawerFilters'
 
 export default function Products() {
   const methods = useForm()
-  const [showDrawer, setShowDrawer] = useState(false)
 
   const products = [
     { id: '1', name: 'Sofá', price: 1999.99, image: Sofa },
@@ -85,14 +84,6 @@ export default function Products() {
                     className="flex-1"
                   />
 
-                  {/* <Button
-                    leftIcon={SlidersVertical}
-                    variant="outline"
-                    size="small"
-                    iconOnly
-                    onPress={() => setShowDrawer(true)}
-                  /> */}
-
                   <DrawerFilters>
                     <Button
                       leftIcon={SlidersVertical}
@@ -120,6 +111,7 @@ export default function Products() {
                   image={item.image}
                   name={item.name}
                   price={item.price}
+                  id={item.id}
                 />
               </Box>
             )}

@@ -15,7 +15,7 @@ type Props = Omit<ComponentProps<typeof GsButton>, 'size' | 'variant'> & {
   rightIcon?: LucideIcon
   iconOnly?: boolean
   fullWidth?: boolean
-  alignment?: 'between' | 'center'
+  alignment?: 'between' | 'center' | 'start'
 }
 
 const buttonStyle = tva({
@@ -42,6 +42,7 @@ const buttonStyle = tva({
     alignment: {
       between: 'justify-between',
       center: 'justify-center',
+      start: 'self-start',
     },
   },
   compoundVariants: [
