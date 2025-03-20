@@ -1,14 +1,8 @@
 import { Box } from '@/components/ui/box'
 import { Image } from '@/components/ui/image'
 import { VStack } from '@/components/ui/vstack'
-import React from 'react'
-import {
-  FlatList,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Text,
-} from 'react-native'
+import React, { useState } from 'react'
+import { FlatList, KeyboardAvoidingView, Platform, Text } from 'react-native'
 
 import { HStack } from '@/components/ui/hstack'
 import { ArrowRight, Search, SlidersVertical } from 'lucide-react-native'
@@ -17,11 +11,13 @@ import Sofa from '@/assets/images/sofa.png'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Productcard } from '@/components/ProductCard'
-import { FormProvider, useForm } from 'react-hook-form'
 import { Link } from 'expo-router'
+import { FormProvider, useForm } from 'react-hook-form'
+import { DrawerFilters } from '@/components/DrawerFilters'
 
 export default function Products() {
   const methods = useForm()
+  const [showDrawer, setShowDrawer] = useState(false)
 
   const products = [
     { id: '1', name: 'Sofá', price: 1999.99, image: Sofa },
@@ -44,77 +40,93 @@ export default function Products() {
   ]
 
   return (
-    <Box className="flex-1 bg-shape-background">
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{ flex: 1 }}
-      >
-        <VStack className="rounded-b-2xl rounded-br-2xl bg-shape-white p-6 gap-8">
-          <HStack className="gap-5 items-center">
-            <Image
-              source={Sofa}
-              alt="Logo"
-              className="size-14 rounded-xl"
-              resizeMode="cover"
-            />
-            <VStack className="flex-1">
-              <Text className="text-title-sm text-grayscale-500">
-                Olá, Brandon!
-              </Text>
-              <HStack className="self-start">
-                <Link asChild href="/(auth)/home/profile">
-                  <Button
-                    title="Ver perfil"
-                    rightIcon={ArrowRight}
-                    variant="link"
-                    size="small"
-                    fullWidth={false}
-                  />
-                </Link>
-              </HStack>
-            </VStack>
-          </HStack>
-
-          <FormProvider {...methods}>
-            <VStack>
-              <Text className="text-body-sm text-grayscale-500 ">
-                Explore produtos
-              </Text>
-              <HStack className="gap-1 items-end">
-                <Input
-                  placeholder="Pesquisar"
-                  leftIcon={Search}
-                  name="search"
-                  className="flex-1"
-                />
-                <Button
-                  leftIcon={SlidersVertical}
-                  variant="outline"
-                  size="small"
-                  iconOnly
-                />
-              </HStack>
-            </VStack>
-          </FormProvider>
-        </VStack>
-
-        <FlatList
-          data={products}
-          numColumns={2}
-          columnWrapperStyle={{ gap: 8 }}
-          contentContainerStyle={{ paddingHorizontal: 16, paddingVertical: 16 }}
-          renderItem={({ item }) => (
-            <Box style={{ flex: 1, marginBottom: 8 }}>
-              <Productcard
-                image={item.image}
-                name={item.name}
-                price={item.price}
+    <>
+      <Box className="flex-1 bg-shape-background">
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{ flex: 1 }}
+        >
+          <VStack className="rounded-b-2xl rounded-br-2xl bg-shape-white p-6 gap-8">
+            <HStack className="gap-5 items-center">
+              <Image
+                source={Sofa}
+                alt="Logo"
+                className="size-14 rounded-xl"
+                resizeMode="cover"
               />
-            </Box>
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      </KeyboardAvoidingView>
-    </Box>
+              <VStack className="flex-1">
+                <Text className="text-title-sm text-grayscale-500">
+                  Olá, Brandon!
+                </Text>
+                <HStack className="self-start">
+                  <Link asChild href="/(auth)/home/profile">
+                    <Button
+                      title="Ver perfil"
+                      rightIcon={ArrowRight}
+                      variant="link"
+                      size="small"
+                      fullWidth={false}
+                    />
+                  </Link>
+                </HStack>
+              </VStack>
+            </HStack>
+
+            <FormProvider {...methods}>
+              <VStack>
+                <Text className="text-body-sm text-grayscale-500 ">
+                  Explore produtos
+                </Text>
+                <HStack className="gap-1 items-end">
+                  <Input
+                    placeholder="Pesquisar"
+                    leftIcon={Search}
+                    name="search"
+                    className="flex-1"
+                  />
+
+                  {/* <Button
+                    leftIcon={SlidersVertical}
+                    variant="outline"
+                    size="small"
+                    iconOnly
+                    onPress={() => setShowDrawer(true)}
+                  /> */}
+
+                  <DrawerFilters>
+                    <Button
+                      leftIcon={SlidersVertical}
+                      variant="outline"
+                      size="small"
+                      iconOnly
+                    />
+                  </DrawerFilters>
+                </HStack>
+              </VStack>
+            </FormProvider>
+          </VStack>
+
+          <FlatList
+            data={products}
+            numColumns={2}
+            columnWrapperStyle={{ gap: 8 }}
+            contentContainerStyle={{
+              paddingHorizontal: 16,
+              paddingVertical: 16,
+            }}
+            renderItem={({ item }) => (
+              <Box style={{ flex: 1, marginBottom: 8 }}>
+                <Productcard
+                  image={item.image}
+                  name={item.name}
+                  price={item.price}
+                />
+              </Box>
+            )}
+            keyExtractor={(item) => item.id}
+          />
+        </KeyboardAvoidingView>
+      </Box>
+    </>
   )
 }

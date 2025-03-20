@@ -18,7 +18,7 @@ export function Checkbox({ title, ...rest }: Props) {
         <CheckboxIcon as={CheckIcon} />
       </CheckboxIndicator>
       <CheckboxLabel className="!text-body-md text-grayscale-400">
-        {title}a
+        {title}
       </CheckboxLabel>
     </GsCheckbox>
   )

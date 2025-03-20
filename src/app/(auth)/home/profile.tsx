@@ -19,7 +19,7 @@ export default function Profile() {
         style={{ height: '100%' }}
         contentContainerStyle={{ flexGrow: 1 }}
       >
-        <Box className="flex-1 px-10 py-6">
+        <Box className="flex-1 p-10">
           <Box className="absolute top-0 right-0 mt-6 mr-10">
             <Link asChild href="/(auth)/signIn">
               <Button

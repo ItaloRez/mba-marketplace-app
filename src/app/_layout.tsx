@@ -19,8 +19,19 @@ import {
 } from '@expo-google-fonts/poppins'
 
 import '../../global.css'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 export { ErrorBoundary } from 'expo-router'
+import {
+  configureReanimatedLogger,
+  ReanimatedLogLevel,
+} from 'react-native-reanimated'
+
+// This is the default configuration
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.warn,
+  strict: false, // Reanimated runs in strict mode by default
+})
 
 SplashScreen.preventAutoHideAsync()
 
@@ -48,10 +59,14 @@ export default function RootLayoutNav() {
   }, [allFontsLoaded])
 
   return (
-    <GluestackUIProvider mode={colorScheme === 'dark' ? 'dark' : 'light'}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Slot />
-      </ThemeProvider>
-    </GluestackUIProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <GluestackUIProvider mode={colorScheme === 'dark' ? 'dark' : 'light'}>
+        <ThemeProvider
+          value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+        >
+          <Slot />
+        </ThemeProvider>
+      </GluestackUIProvider>
+    </GestureHandlerRootView>
   )
 }
