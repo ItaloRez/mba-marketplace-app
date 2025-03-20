@@ -4,7 +4,7 @@ import {
   Button as GsButton,
 } from '@/components/ui/button'
 import { LucideIcon } from 'lucide-react-native'
-import { ComponentProps } from 'react'
+import { ComponentProps, forwardRef } from 'react'
 import { tva } from '@gluestack-ui/nativewind-utils/tva'
 
 type Props = Omit<ComponentProps<typeof GsButton>, 'size' | 'variant'> & {
@@ -14,6 +14,7 @@ type Props = Omit<ComponentProps<typeof GsButton>, 'size' | 'variant'> & {
   leftIcon?: LucideIcon
   rightIcon?: LucideIcon
   iconOnly?: boolean
+  fullWidth?: boolean
 }
 
 const buttonStyle = tva({
@@ -23,7 +24,7 @@ const buttonStyle = tva({
       solid: '',
       outline:
         'bg-transparent border border-orange-base data-[active=true]:border-orange-dark data-[active=true]:bg-orange-base/10',
-      link: 'bg-transparent data-[active=true]:bg-orange-base/10',
+      link: 'bg-transparent data-[active=true]:bg-transparent group',
     },
     size: {
       medium: 'px-5',
@@ -31,10 +32,26 @@ const buttonStyle = tva({
     },
     iconOnly: {
       true: 'self-start',
-      false: 'w-full justify-between',
+      false: '',
+    },
+    fullWidth: {
+      true: 'w-full justify-between',
+      false: 'self-start',
     },
   },
   compoundVariants: [
+    {
+      iconOnly: true,
+      fullWidth: true,
+      size: 'medium',
+      class: 'self-start w-auto w-14 justify-center',
+    },
+    {
+      iconOnly: true,
+      fullWidth: true,
+      size: 'small',
+      class: 'self-start w-auto w-10 justify-center',
+    },
     {
       iconOnly: true,
       size: 'medium',
@@ -45,6 +62,16 @@ const buttonStyle = tva({
       size: 'small',
       class: 'h-10 w-10',
     },
+    {
+      variant: 'link',
+      size: 'medium',
+      class: 'px-0 ',
+    },
+    {
+      variant: 'link',
+      size: 'small',
+      class: 'px-0',
+    },
   ],
 })
 
@@ -54,7 +81,7 @@ const buttonTextStyle = tva({
     variant: {
       solid: '',
       outline: '!text-orange-base',
-      link: '!text-orange-base',
+      link: '!text-orange-base group-data-[active=true]:!text-orange-dark',
     },
     size: {
       medium: 'text-action-md',
@@ -64,34 +91,49 @@ const buttonTextStyle = tva({
   compoundVariants: [],
 })
 
-export function Button({
-  title,
-  leftIcon,
-  rightIcon,
-  variant = 'solid',
-  size = 'medium',
-  iconOnly = false,
-  ...rest
-}: Props) {
-  return (
-    <GsButton className={buttonStyle({ size, variant, iconOnly })} {...rest}>
-      {leftIcon && (
-        <ButtonIcon
-          as={leftIcon}
-          className={buttonTextStyle({ size, variant })}
-        />
-      )}
-      {title && (
-        <ButtonText className={buttonTextStyle({ size, variant })}>
-          {title}
-        </ButtonText>
-      )}
-      {rightIcon && (
-        <ButtonIcon
-          as={rightIcon}
-          className={buttonTextStyle({ size, variant })}
-        />
-      )}
-    </GsButton>
-  )
-}
+export const Button = forwardRef<React.ElementRef<typeof GsButton>, Props>(
+  (
+    {
+      title,
+      leftIcon,
+      rightIcon,
+      variant = 'solid',
+      size = 'medium',
+      iconOnly = false,
+      fullWidth = true, // Valor padrão é true
+      ...rest
+    },
+    ref,
+  ) => {
+    return (
+      <GsButton
+        ref={ref}
+        className={buttonStyle({
+          size,
+          variant,
+          iconOnly,
+          fullWidth,
+        })}
+        {...rest}
+      >
+        {leftIcon && (
+          <ButtonIcon
+            as={leftIcon}
+            className={buttonTextStyle({ size, variant })}
+          />
+        )}
+        {title && (
+          <ButtonText className={buttonTextStyle({ size, variant })}>
+            {title}
+          </ButtonText>
+        )}
+        {rightIcon && (
+          <ButtonIcon
+            as={rightIcon}
+            className={buttonTextStyle({ size, variant })}
+          />
+        )}
+      </GsButton>
+    )
+  },
+)

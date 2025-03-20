@@ -29,6 +29,7 @@ export function Input({
   isReadOnly = false,
   leftIcon,
   label,
+  className,
   ...rest
 }: Props) {
   const [showPassword, setShowPassword] = useState(false)
@@ -52,7 +53,7 @@ export function Input({
             isInvalid={invalid}
             size="md"
             isReadOnly={isReadOnly}
-            className="pt-5 w-full"
+            className={`${label ? 'pt-3' : ''} w-full ${className}`}
           >
             <GSInput
               className={'my-1 group'}
@@ -91,8 +92,8 @@ export function Input({
                 className={['ml-2'].join(' ')}
                 value={value}
                 onChangeText={onChange}
-                {...rest}
                 secureTextEntry={isPassword && !showPassword}
+                {...rest}
               />
 
               {isPassword && (

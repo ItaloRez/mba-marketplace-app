@@ -38,7 +38,7 @@ export default function SignUp() {
   })
 
   return (
-    <Box className="flex-1 bg-white h-[100vh]">
+    <Box className="flex-1 bg-shape-white h-[100vh]">
       <ScrollView
         style={{ height: '100%' }}
         contentContainerStyle={{ flexGrow: 1 }}

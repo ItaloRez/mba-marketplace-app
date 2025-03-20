@@ -37,7 +37,7 @@ export default function Home() {
   })
 
   return (
-    <Box className="flex-1 bg-white h-[100vh] px-10 py-16">
+    <Box className="flex-1 bg-shape-white h-[100vh] px-10 py-16">
       <VStack className="w-full justify-center gap-8 items-center">
         <Image
           source={Logo}
@@ -55,26 +55,26 @@ export default function Home() {
         </VStack>
       </VStack>
       <VStack className="gap-10 mt-10">
-        <VStack className="gap-5">
-          <FormProvider {...methods}>
-            <Input
-              placeholder="E-mail"
-              keyboardType="email-address"
-              label="e-mail"
-              leftIcon={Mail}
-              name="email"
-            />
-            <Input
-              secureTextEntry
-              name="password"
-              label="Senha"
-              placeholder="Sua senha"
-              leftIcon={Access}
-            />
-          </FormProvider>
-        </VStack>
+        <FormProvider {...methods}>
+          <Input
+            placeholder="E-mail"
+            keyboardType="email-address"
+            label="e-mail"
+            leftIcon={Mail}
+            name="email"
+          />
+          <Input
+            secureTextEntry
+            name="password"
+            label="Senha"
+            placeholder="Sua senha"
+            leftIcon={Access}
+          />
+        </FormProvider>
 
-        <Button title="Acessar" rightIcon={ArrowRight} />
+        <Link asChild href="/(auth)/home/products">
+          <Button title="Acessar" rightIcon={ArrowRight} />
+        </Link>
       </VStack>
       <VStack className="mt-auto gap-5">
         <Text className="text-body-md text-grayscale-300">
