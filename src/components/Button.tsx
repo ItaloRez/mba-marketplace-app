@@ -15,6 +15,7 @@ type Props = Omit<ComponentProps<typeof GsButton>, 'size' | 'variant'> & {
   rightIcon?: LucideIcon
   iconOnly?: boolean
   fullWidth?: boolean
+  alignment?: 'between' | 'center'
 }
 
 const buttonStyle = tva({
@@ -37,6 +38,10 @@ const buttonStyle = tva({
     fullWidth: {
       true: 'w-full justify-between',
       false: 'self-start',
+    },
+    alignment: {
+      between: 'justify-between',
+      center: 'justify-center',
     },
   },
   compoundVariants: [
@@ -101,6 +106,7 @@ export const Button = forwardRef<React.ElementRef<typeof GsButton>, Props>(
       size = 'medium',
       iconOnly = false,
       fullWidth = true, // Valor padrão é true
+      alignment = 'between',
       ...rest
     },
     ref,
@@ -113,6 +119,7 @@ export const Button = forwardRef<React.ElementRef<typeof GsButton>, Props>(
           variant,
           iconOnly,
           fullWidth,
+          alignment,
         })}
         {...rest}
       >

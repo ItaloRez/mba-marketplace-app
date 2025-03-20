@@ -65,22 +65,23 @@ export default function SignUp() {
             <VStack className="gap-10">
               <VStack className="items-center mt-8">
                 <ImageUpload />
-
-                <Input
-                  placeholder="Seu nome completo"
-                  label="Nome"
-                  name="name"
-                  leftIcon={User}
-                />
-                <Input
-                  placeholder="(00) 00000-0000"
-                  label="Telefone"
-                  name="phone"
-                  leftIcon={Phone}
-                />
+                <VStack className="gap-5 mt-5 w-full">
+                  <Input
+                    placeholder="Seu nome completo"
+                    label="Nome"
+                    name="name"
+                    leftIcon={User}
+                  />
+                  <Input
+                    placeholder="(00) 00000-0000"
+                    label="Telefone"
+                    name="phone"
+                    leftIcon={Phone}
+                  />
+                </VStack>
               </VStack>
 
-              <VStack>
+              <VStack className="gap-5">
                 <Text className="text-title-sm text-grayscale-500">Acesso</Text>
                 <Input
                   placeholder="mail@exemplo.br"

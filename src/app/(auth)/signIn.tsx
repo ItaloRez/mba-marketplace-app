@@ -56,20 +56,22 @@ export default function Home() {
       </VStack>
       <VStack className="gap-10 mt-10">
         <FormProvider {...methods}>
-          <Input
-            placeholder="E-mail"
-            keyboardType="email-address"
-            label="e-mail"
-            leftIcon={Mail}
-            name="email"
-          />
-          <Input
-            secureTextEntry
-            name="password"
-            label="Senha"
-            placeholder="Sua senha"
-            leftIcon={Access}
-          />
+          <VStack className="gap-5">
+            <Input
+              placeholder="E-mail"
+              keyboardType="email-address"
+              label="e-mail"
+              leftIcon={Mail}
+              name="email"
+            />
+            <Input
+              secureTextEntry
+              name="password"
+              label="Senha"
+              placeholder="Sua senha"
+              leftIcon={Access}
+            />
+          </VStack>
         </FormProvider>
 
         <Link asChild href="/(auth)/home/products">
